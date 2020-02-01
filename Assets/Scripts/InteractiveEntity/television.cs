@@ -16,10 +16,10 @@ public class Television : InteractiveEntity
         
     }
 
-    public override bool OnInteract(KeyCode keyCode)
-    {
-        return false;
-    }
+    //public override bool OnInteract(KeyCode keyCode)
+    //{
+    //    return false;
+    //}
 
     public override void AddRequiredTool(){
    // 坏掉的时候所需要的工具
