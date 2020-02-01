@@ -20,7 +20,7 @@ abstract public class InteractiveEntity : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        DrawUI();
     }
 
     // Update is called once per frame
@@ -133,7 +133,7 @@ abstract public class InteractiveEntity : MonoBehaviour
 
     public virtual void DrawUI()
     {
-        
+        Resources.Load<Sprite>("ui/hammer_01.png");
     }
 
     public virtual void OnPlayerExit() { }

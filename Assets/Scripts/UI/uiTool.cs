@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class uiTool : MonoBehaviour
 {
     [SerializeField] Text text;
+    [SerializeField] Text textBg;
     [SerializeField] Image selector;
 
     public void EnSelect()
@@ -21,6 +22,7 @@ public class uiTool : MonoBehaviour
     public void SetText(string value)
     {
         text.text = value;
+        textBg.text = value;
     }
     // Start is called before the first frame update
     void Start()
