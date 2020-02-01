@@ -23,9 +23,12 @@ public class Cat : MonoBehaviour
     float timer = 0f;
     Vector2 direction = Vector2.zero;
     float moveTime = 1.0f;
+    float attackTime = 1.0f;
     int walkedCount = 0;
     GameObject targetAttack;
-    [SerializeField] int maxRandomWalk = 4;
+    [SerializeField] int leastRandomWalk = 4;
+    [SerializeField] float baseProb = 0.4f;
+    [SerializeField] float perWalkProb = 0.1f;
     [SerializeField] float moveSpeed = 1.0f;
     [SerializeField] float attackRange = 2.0f;
     // Start is called before the first frame update
@@ -37,44 +40,71 @@ public class Cat : MonoBehaviour
     // cat behave
     void CatWalk()
     {
-
-        // check attack
-        // this.transform.Translate(v)
-        // if moveover then NextActionDecide()
+        Vector2 nextPos = this.transform.position;
+        nextPos += direction * moveSpeed * Time.deltaTime;
+        if (TryAttack(nextPos))
+        {
+            return;
+        }
+        this.transform.position = nextPos;
     }
 
     void NextActionDecide()
     {
-        if(walkedCount > maxRandomWalk)
+        float probAttack = 0f;
+        if (walkedCount >= leastRandomWalk)
         {
-            // decide to attack
-            Collider2D[] colliderCollection = Physics2D.OverlapCircleAll(this.transform.position, attackRange);
-            foreach (var collider in colliderCollection)
+            probAttack = baseProb + (walkedCount - leastRandomWalk) * perWalkProb;
+        }
+        float r = Random.Range(0, 1.0f);
+        if (r < probAttack)
+        {
+            if (TryAttack(this.transform.position))
             {
-                if(collider.tag == "interact")
+                return;
+            }
+        }
+        // if didn't attack
+        if (r < 0.8f)
+        {
+            float angle = Random.Range(0, 360);
+            direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+            moveTime = Random.Range(1f, 2f);
+            timer = moveTime;
+            state = CatState.walk;
+        }
+        else
+        {
+            float idleTime = Random.Range(1f, 2f);
+            timer = idleTime;
+            state = CatState.idle;
+        }
+    }
+
+    bool TryAttack(Vector2 pos, CatAttackType attackType = CatAttackType.bite)
+    {
+        Collider2D[] colliderCollection = Physics2D.OverlapCircleAll(pos, attackRange);
+        foreach (var collider in colliderCollection)
+        {
+            if (collider.tag == "interact")
+            {
+                targetAttack = collider.gameObject;
+                InteractiveEntity targetAttack_ie = targetAttack.GetComponent<InteractiveEntity>();
+                if (targetAttack_ie.AttackCheck())
                 {
-                    targetAttack = collider.gameObject;
+                    CatAttack(targetAttack_ie, CatAttackType.bite);
+                    return true;
                 }
             }
         }
-        float r = Random.Range(0, 1.0f);
-        if (r < 0.5f)
-        {
-
-        }
-
-        float angle = Random.Range(0, 360);
-        direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-        moveTime = Random.Range(1f, 2f);
-        timer = moveTime;
-        // get random direction
-        // start attack if available  play attack anim. CatAttack()
-        // set timer
+        return false;
     }
 
     void CatAttack(InteractiveEntity target, CatAttackType attackType)
     {
         target.OnCatInteract(attackType);
+        state = CatState.attack;
+        timer = attackTime;
     }
 
     // Update is called once per frame
@@ -83,8 +113,7 @@ public class Cat : MonoBehaviour
         switch (state)
         {
             case CatState.idle:
-                // idle timer
-                // if idleover then NextActionDecide()
+                // pass
                 break;
             case CatState.walk:
                 CatWalk();
@@ -98,7 +127,9 @@ public class Cat : MonoBehaviour
             default:
                 break;
         }
-        CatWalk();
+        timer -= Time.deltaTime;
+        if (timer < 0)
+            NextActionDecide();
     }
 
     public void OnBeLoved()
