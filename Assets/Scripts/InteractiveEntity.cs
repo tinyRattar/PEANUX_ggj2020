@@ -19,21 +19,15 @@ abstract public class InteractiveEntity : MonoBehaviour
     [SerializeField] public int band_required = 0; //6
     [SerializeField] bool canAttack = true;
     public bool AttackCheck() { return canAttack; }
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] List<GameObject> listBubbles;
+    public void Init()
     {
+        SetDurabilityMax();
         DrawUI();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
-    
-
     public virtual bool OnInteract(KeyCode keyCode) {
+        DrawUI();
         return OnInteract(keyCode, PlayerCTRL.instance.cur_tool);
     }
 
@@ -77,7 +71,8 @@ abstract public class InteractiveEntity : MonoBehaviour
                 AddRequiredTool();
             }
         }
-     }
+        DrawUI();
+    }
 
     // 纯虚函数，家具的最大耐久度，每个家具不一样
     public virtual void SetDurabilityMax(){
@@ -95,6 +90,7 @@ abstract public class InteractiveEntity : MonoBehaviour
 
     public virtual bool OnRepair(ToolType tool) {
         if(isRequiredTool(tool)){
+            DrawUI();
             return true;
         }
         return false; 
@@ -134,6 +130,16 @@ abstract public class InteractiveEntity : MonoBehaviour
                     spanner_required--;
                     durability += uniform_damage*0.9f;
                     PlayerCTRL.instance.spanner_num--;
+                    PlayerCTRL.instance.cur_tool = ToolType.empty;
+                    return true;
+                }
+                break;
+            case ToolType.washKit:
+                if (washKit_required > 0)
+                {
+                    washKit_required--;
+                    durability += uniform_damage * 0.9f;
+                    PlayerCTRL.instance.washKit_num--;
                     PlayerCTRL.instance.cur_tool = ToolType.empty;
                     return true;
                 }
@@ -188,7 +194,42 @@ abstract public class InteractiveEntity : MonoBehaviour
 
     public virtual void DrawUI()
     {
-        Resources.Load<Sprite>("ui/hammer_01.png");
+        int index = 0;
+        foreach (var b in listBubbles)
+        {
+            b.GetComponent<bubble>().SetInvisible();
+        }
+        if (sewingKit_required > 0)
+        {
+            if (index == listBubbles.Count) { listBubbles[index].GetComponent<bubble>().SetToolsMore(); }
+            else { listBubbles[index++].GetComponent<bubble>().SetTool(ToolType.sewingKit); }
+        }
+        if (hammer_required > 0)
+        {
+            Debug.Log("hammer require");
+            if (index == listBubbles.Count) { listBubbles[index].GetComponent<bubble>().SetToolsMore(); }
+            else { listBubbles[index++].GetComponent<bubble>().SetTool(ToolType.hammer); }
+        }
+        if (screwer_required > 0)
+        {
+            if (index == listBubbles.Count) { listBubbles[index].GetComponent<bubble>().SetToolsMore(); }
+            else { listBubbles[index++].GetComponent<bubble>().SetTool(ToolType.screwer); }
+        }
+        if (spanner_required > 0)
+        {
+            if (index == listBubbles.Count) { listBubbles[index].GetComponent<bubble>().SetToolsMore(); }
+            else { listBubbles[index++].GetComponent<bubble>().SetTool(ToolType.spanner); }
+        }
+        if (washKit_required > 0)
+        {
+            if (index == listBubbles.Count) { listBubbles[index].GetComponent<bubble>().SetToolsMore(); }
+            else { listBubbles[index++].GetComponent<bubble>().SetTool(ToolType.washKit); }
+        }
+        Debug.Log(index);
+        for (int i = 0; i < index; i++)
+        {
+            listBubbles[i].GetComponent<bubble>().SetVisible();
+        }
     }
 
     public virtual void OnPlayerExit() { }

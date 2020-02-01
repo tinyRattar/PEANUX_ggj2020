@@ -7,7 +7,7 @@ public class Television : InteractiveEntity
     // Start is called before the first frame update
     void Start()
     {
-        SetDurabilityMax();
+        Init();
     }
 
     // Update is called once per frame

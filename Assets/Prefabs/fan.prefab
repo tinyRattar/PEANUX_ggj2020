@@ -60,8 +60,8 @@ MonoBehaviour:
   canAttack: 1
   listBubbles:
   - {fileID: 6720231630711832523}
-  - {fileID: 2497799212798441198}
   - {fileID: 5377079514445482069}
+  - {fileID: 2497799212798441198}
 --- !u!61 &455184702570726322
 BoxCollider2D:
   m_ObjectHideFlags: 0

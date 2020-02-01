@@ -881,7 +881,6 @@ MonoBehaviour:
   washKit_required: 0
   band_required: 0
   canAttack: 1
-  listBubbles: []
   perGenMoney: 1
   ui_shop: {fileID: 1434407660}
 --- !u!1 &319844880
@@ -918,12 +917,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  fooled_nums: 0
   leastRandomWalk: 4
   attackProb: 0.8
   perWalkProb: 0.1
   restProb: 0.2
   moveSpeed: 1
   attackRange: 1
+  catPlayTimer: 5
 --- !u!212 &319844882
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1775,12 +1776,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  fooled_nums: 0
   leastRandomWalk: 4
   attackProb: 0.8
   perWalkProb: 0.1
   restProb: 0.2
   moveSpeed: 1
   attackRange: 1
+  catPlayTimer: 5
 --- !u!212 &909669517
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2534,7 +2537,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1434407661
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3005,12 +3008,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  fooled_nums: 0
   leastRandomWalk: 4
   attackProb: 0.8
   perWalkProb: 0.1
   restProb: 0.2
   moveSpeed: 1
   attackRange: 1
+  catPlayTimer: 5
 --- !u!212 &1592997320
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3441,6 +3446,7 @@ MonoBehaviour:
   spanner_num: 5
   washKit_num: 5
   band_num: 5
+  club_num: 5
   cur_tool: 0
 --- !u!4 &1868258303
 Transform:
