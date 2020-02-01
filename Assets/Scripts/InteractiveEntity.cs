@@ -4,8 +4,8 @@ using UnityEngine;
 
 abstract public class InteractiveEntity : MonoBehaviour
 {
-    [SerializeField] float durability = 30;
-    [SerializeField] float durability_max = 20;
+    [SerializeField] public float durability = 30;
+    [SerializeField] public float durability_max = 20;
     float bite_damage = 4;
     float scratch_damage = 4;
     float pee_damage = 4;
@@ -30,17 +30,17 @@ abstract public class InteractiveEntity : MonoBehaviour
     }
 
     public virtual bool OnInteract(KeyCode keyCode) {
-        // OnInteract(keyCode, person.current_tool)
-        return false;
-     }
+        return OnInteract(keyCode, PlayerCTRL.instance.cur_tool);
+    }
 
     public virtual bool OnInteract(KeyCode keyCode, ToolType current_tool) {
-        if(keyCode == KeyCode.E) {
+        if (keyCode == KeyCode.E) {
             return OnRepair(current_tool);
         }
         return false;
-     }
+    }
 
+    // 坏掉的时候所需要的工具
     // 纯虚函数，每个家具不一样
     public virtual void AddRequiredTool(){
         
@@ -69,20 +69,20 @@ abstract public class InteractiveEntity : MonoBehaviour
         }
      }
 
+    // 纯虚函数，家具的最大耐久度，每个家具不一样
     public virtual void SetDurabilityMax(){
 
     }
 
+    // 在完全被破坏的状态
     public virtual void OnTotalDamage(){
 
     }
 
-    public virtual bool OnRepair(ToolType tool) { 
+    public virtual bool OnRepair(ToolType tool) {
+        Debug.Log("on repair");
         if(isRequiredTool(tool)){
-            
-        }
-        else{
-            return false;
+            return true;
         }
         return false; 
     }
@@ -93,6 +93,8 @@ abstract public class InteractiveEntity : MonoBehaviour
                 if (sewingKit_required>0){
                     sewingKit_required--;
                     durability += uniform_damage*0.9f;
+                    PlayerCTRL.instance.sewingKit_num--;
+                    PlayerCTRL.instance.cur_tool = ToolType.empty;
                     return true;
                 }
                 break;
@@ -100,6 +102,8 @@ abstract public class InteractiveEntity : MonoBehaviour
                 if (hammer_required>0){
                     hammer_required--;
                     durability += uniform_damage*0.9f;
+                    PlayerCTRL.instance.hammer_num--;
+                    PlayerCTRL.instance.cur_tool = ToolType.empty;
                     return true;
                 }
                 break;
@@ -107,6 +111,8 @@ abstract public class InteractiveEntity : MonoBehaviour
                 if (screwer_required>0){
                     screwer_required--;
                     durability += uniform_damage*0.9f;
+                    PlayerCTRL.instance.screwer_num--;
+                    PlayerCTRL.instance.cur_tool = ToolType.empty;
                     return true;
                 }
                 break;
@@ -114,6 +120,8 @@ abstract public class InteractiveEntity : MonoBehaviour
                 if (spanner_required>0){
                     spanner_required--;
                     durability += uniform_damage*0.9f;
+                    PlayerCTRL.instance.spanner_num--;
+                    PlayerCTRL.instance.cur_tool = ToolType.empty;
                     return true;
                 }
                 break;

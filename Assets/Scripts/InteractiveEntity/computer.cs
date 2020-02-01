@@ -31,6 +31,11 @@ public class Computer : InteractiveEntity
         shopOpen = false;
     }
 
+    // 纯虚函数，家具的最大耐久度，每个家具不一样
+    public virtual void SetDurabilityMax(){
+        durability_max = 99999.0f;
+    }
+
     public override bool OnInteract(KeyCode keyCode)
     {
         if(keyCode == KeyCode.E)

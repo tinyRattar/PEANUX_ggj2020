@@ -11,12 +11,13 @@ public enum playerState
 
 public enum ToolType
 {
-    sewingKit,
-    hammer,
-    screwer,
-    spanner,
-    washKit,
-    band
+    empty,
+    sewingKit, //1
+    hammer, //2
+    screwer, //3
+    spanner, //4
+    washKit, //5
+    band //6
 }
 
 public class PlayerCTRL : MonoBehaviour
@@ -25,6 +26,17 @@ public class PlayerCTRL : MonoBehaviour
     [SerializeField] int money;
     [SerializeField] float moveSpeed = 1.0f;
     [SerializeField] float interactRange = 1.0f;
+    
+    // 拥有的工具的数量
+    [SerializeField] public int sewingKit_num = 5;
+    [SerializeField] public int hammer_num = 5;
+    [SerializeField] public int screwer_num = 5;
+    [SerializeField] public int spanner_num = 5;
+    [SerializeField] public int washKit_num = 5;
+    [SerializeField] public int band_num = 5;
+
+    [SerializeField] public ToolType cur_tool = ToolType.empty;
+
     playerState state = playerState.idle;
     List<InteractiveEntity> attachedEntities = new List<InteractiveEntity>();
 
@@ -40,6 +52,7 @@ public class PlayerCTRL : MonoBehaviour
     void Start()
     {
         instance = this;
+        this.cur_tool = ToolType.empty; 
     }
 
     // Update is called once per frame
@@ -64,11 +77,46 @@ public class PlayerCTRL : MonoBehaviour
             }
         }else if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            // use tool 1
-            Collider2D attachedItem = Physics2D.OverlapCircle(this.transform.position, interactRange);
+            if(sewingKit_num > 0){
+              cur_tool = ToolType.sewingKit;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            
+            if(hammer_num > 0){
+                cur_tool = ToolType.hammer;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if(screwer_num > 0){
+                cur_tool = ToolType.screwer;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            if(spanner_num > 0){
+                cur_tool = ToolType.spanner;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            if(washKit_num > 0)
+            {
+                cur_tool = ToolType.washKit;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            if(band_num > 0)
+            {
+                cur_tool = ToolType.band;
+            }
+        }
+        
 
-        }// todo: other tools
-
+        
         Vector2 dV = new Vector2(dx, dy);
         this.transform.Translate(dV * Time.deltaTime * moveSpeed);
     }
