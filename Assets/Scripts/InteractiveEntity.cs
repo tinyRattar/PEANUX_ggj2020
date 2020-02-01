@@ -30,7 +30,6 @@ abstract public class InteractiveEntity : MonoBehaviour
     }
 
     public virtual bool OnInteract(KeyCode keyCode) {
-        Debug.Log(this.name);
         return OnInteract(keyCode, PlayerCTRL.instance.cur_tool);
     }
 
@@ -81,7 +80,6 @@ abstract public class InteractiveEntity : MonoBehaviour
     }
 
     public virtual bool OnRepair(ToolType tool) {
-        Debug.Log("on repair");
         if(isRequiredTool(tool)){
             return true;
         }

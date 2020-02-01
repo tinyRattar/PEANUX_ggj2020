@@ -5,6 +5,7 @@ using UnityEngine;
 public class btnPurchaseTool : btnPurchase
 {
     [SerializeField] ToolType targetTool;
+    [SerializeField] int addNum = 3;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,7 @@ public class btnPurchaseTool : btnPurchase
     public override void DealPurchase()
     {
         base.DealPurchase();
-        Debug.LogError("todo: no implement");
+        PlayerCTRL.instance.AddToolNum((int)targetTool, addNum);
+        // Debug.LogError("todo: no implement");
     }
 }

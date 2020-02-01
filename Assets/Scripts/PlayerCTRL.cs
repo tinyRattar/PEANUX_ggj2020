@@ -26,7 +26,7 @@ public class PlayerCTRL : MonoBehaviour
     [SerializeField] int money;
     [SerializeField] float moveSpeed = 1.0f;
     [SerializeField] float interactRange = 1.0f;
-    
+
     // 拥有的工具的数量
     [SerializeField] public int sewingKit_num = 5;
     [SerializeField] public int hammer_num = 5;
@@ -47,7 +47,56 @@ public class PlayerCTRL : MonoBehaviour
 
     public int GetMoney() { return this.money; }
 
-    
+    public int GetToolNum(int index)
+    {
+        switch (index)
+        {
+            case 1:
+                return sewingKit_num;
+            case 2:
+                return hammer_num;
+            case 3:
+                return screwer_num;
+            case 4:
+                return spanner_num;
+            case 5:
+                return washKit_num;
+            case 6:
+                return band_num;
+            default:
+                break;
+        }
+        return -1;
+    }
+
+    public int AddToolNum(int index, int value)
+    {
+        switch (index)
+        {
+            case 1:
+                sewingKit_num += value;
+                break;
+            case 2:
+                hammer_num += value;
+                break;
+            case 3:
+                screwer_num += value;
+                break;
+            case 4:
+                spanner_num += value;
+                break;
+            case 5:
+                washKit_num += value;
+                break;
+            case 6:
+                band_num += value;
+                break;
+            default:
+                break;
+        }
+        return -1;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,16 +112,20 @@ public class PlayerCTRL : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            foreach (var item in attachedEntities)
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, interactRange);
+            foreach (var item in colliders)
             {
-                item.OnInteract(KeyCode.E);
+                if (item.tag != "interact") continue;
+                item.GetComponent<InteractiveEntity>().OnInteract(KeyCode.E);
                 break;
             }
         }else if (Input.GetKeyDown(KeyCode.F))
         {
-            foreach (var item in attachedEntities)
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, interactRange);
+            foreach (var item in colliders)
             {
-                item.OnInteract(KeyCode.F);
+                if (item.tag != "interact") continue;
+                item.GetComponent<InteractiveEntity>().OnInteract(KeyCode.F);
                 break;
             }
         }else if (Input.GetKeyDown(KeyCode.Alpha1))
