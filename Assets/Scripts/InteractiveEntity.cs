@@ -4,7 +4,7 @@ using UnityEngine;
 
 abstract public class InteractiveEntity : MonoBehaviour
 {
-    [SerializeField] float durability = 1;
+    [SerializeField] float durability = 30;
     [SerializeField] float durability_max = 20;
     float bite_damage = 4;
     float scratch_damage = 4;
@@ -27,10 +27,14 @@ abstract public class InteractiveEntity : MonoBehaviour
         
     }
 
+    public virtual bool OnInteract(KeyCode keyCode) {
+        // OnInteract(keyCode, person.current_tool)
+
+     }
+
     public virtual bool OnInteract(KeyCode keyCode, ToolType current_tool) {
         if(Input.GetKeyDown(KeyCode.E)) {
             return OnRepair(current_tool);
-            
         }
 
      }
