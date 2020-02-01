@@ -9,11 +9,20 @@ public enum playerState
     repair
 }
 
+public enum ToolType
+{
+    sewingKit,
+    hammer,
+    screwer,
+    spanner
+}
+
 public class PlayerCTRL : MonoBehaviour
 {
     public static PlayerCTRL instance;
     [SerializeField] int money;
     [SerializeField] float moveSpeed = 1.0f;
+    [SerializeField] float interactRange = 1.0f;
     playerState state = playerState.idle;
     List<InteractiveEntity> attachedEntities = new List<InteractiveEntity>();
 
@@ -42,8 +51,14 @@ public class PlayerCTRL : MonoBehaviour
             foreach (var item in attachedEntities)
             {
                 item.OnInteract(KeyCode.E);
+                break;
             }
-        }
+        }else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            // use tool 1
+            Collider2D attachedItem = Physics2D.OverlapCircle(this.transform.position, interactRange);
+
+        }// todo: other tools
 
         Vector2 dV = new Vector2(dx, dy);
         this.transform.Translate(dV * Time.deltaTime * moveSpeed);

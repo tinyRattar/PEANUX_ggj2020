@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class computer : InteractiveEntity
+public class Computer : InteractiveEntity
 {
     [SerializeField] int perGenMoney = 1;
     // Start is called before the first frame update

@@ -16,13 +16,13 @@ abstract public class InteractiveEntity : MonoBehaviour
         
     }
 
-    virtual public void OnInteract(KeyCode keyCode)
+    public virtual void OnInteract(KeyCode keyCode) { }
+    public virtual void OnCatInteract(CatAttackType type) { }
+    public virtual bool OnRepair(ToolType tool) { return false; }
+
+    public virtual void DrawUI()
     {
 
     }
 
-    public virtual void OnCatInteract(CatAttackType type)
-    {
-
-    }
 }

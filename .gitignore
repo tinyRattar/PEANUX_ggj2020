@@ -1,5 +1,8 @@
-Library
-Logs
-Packages
 *.csproj
 *.sln
+Library/
+Logs/
+Packages/
+.vs/
+obj/
+Temp/
