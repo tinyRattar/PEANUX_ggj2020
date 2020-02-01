@@ -11,7 +11,7 @@ public class uiTool : MonoBehaviour
 
     public void EnSelect()
     {
-        selector.color = new Color(224f/255f, 58f/255f, 99f/255f, 1f);
+        selector.color = new Color(1f, 1f, 1f, 1f);
     }
 
     public void DisSelect()
