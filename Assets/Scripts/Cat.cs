@@ -24,11 +24,14 @@ public class Cat : MonoBehaviour
     Vector2 direction = Vector2.zero;
     float moveTime = 1.0f;
     float attackTime = 1.0f;
-    [SerializeField]int walkedCount = 0;
+    int walkedCount = 0;
     GameObject targetAttack;
     [SerializeField] int leastRandomWalk = 4;
-    [SerializeField] float baseProb = 0.4f;
-    [SerializeField] float perWalkProb = 0.1f;
+    [SerializeField] int attackProb = 0.8f;
+    
+    //[SerializeField] float baseProb = 0.4f;
+    [SerializeField] float perWalkProb = 0.2f;
+    [SerializeField] float restProb = 0.2f;
     [SerializeField] float moveSpeed = 1.0f;
     [SerializeField] float attackRange = 2.0f;
     // Start is called before the first frame update
@@ -42,46 +45,43 @@ public class Cat : MonoBehaviour
     {
         Vector2 nextPos = this.transform.position;
         nextPos += direction * moveSpeed * Time.deltaTime;
-        if (walkedCount > leastRandomWalk)
+        if (TryAttack(nextPos))
         {
-            if (TryAttack(nextPos))
-            {
-                walkedCount = 0;
-                return;
-            }
-        }  
+            return;
+        }
         this.transform.position = nextPos;
     }
 
     void NextActionDecide()
     {
-        float probAttack = 0f;
+        float r1 = 0f; // probability of attack
+        float r2 = Random.Range(0, 1.0f); // probability of rest
+
         if (walkedCount >= leastRandomWalk)
         {
-            probAttack = baseProb + (walkedCount - leastRandomWalk) * perWalkProb;
+            float p = Random.Range(0.5f, 1.0f);
+            r1 = walkedCount * perWalkProb * p;
         }
-        float r = Random.Range(0, 1.0f);
-        if (r < probAttack)
+        
+        if (r1 > attackProb)
         {
             if (TryAttack(this.transform.position))
             {
-                walkedCount = 0;
                 return;
             }
         }
         // if didn't attack
-        if (r < 0.8f)
+        if (r2 >= restProb)
         {
             float angle = Random.Range(0, 360);
             direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
             moveTime = Random.Range(1f, 2f);
             timer = moveTime;
             state = CatState.walk;
-            walkedCount++;
         }
         else
         {
-            float idleTime = Random.Range(0.5f, 1f);
+            float idleTime = Random.Range(1f, 2f);
             timer = idleTime;
             state = CatState.idle;
         }
@@ -125,7 +125,6 @@ public class Cat : MonoBehaviour
                 CatWalk();
                 break;
             case CatState.attack:
-                //Debug.Log("in attacking");
                 // attack timer
                 // if attackover then NextActionDecide()
                 break;
