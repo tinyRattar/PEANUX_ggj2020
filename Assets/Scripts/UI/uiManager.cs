@@ -7,6 +7,7 @@ public class uiManager : MonoBehaviour
 {
     [SerializeField] Text uiMoney;
     [SerializeField] List<uiTool> uiTools;
+    [SerializeField] Image processBar;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,5 +26,6 @@ public class uiManager : MonoBehaviour
             else
                 uiTools[i].DisSelect();
         }
+        processBar.fillAmount = InteractiveEntity.total_durability / InteractiveEntity.total_durability_max;
     }
 }

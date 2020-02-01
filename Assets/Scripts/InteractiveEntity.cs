@@ -5,6 +5,7 @@ using UnityEngine;
 abstract public class InteractiveEntity : MonoBehaviour
 {
     [SerializeField] static public float total_durability = 0.0f;
+    [SerializeField] static public float total_durability_max = 0.0f;
     [SerializeField] public float durability = 30;
     [SerializeField] public float durability_max = 20;
     protected float bite_damage = 4;
@@ -26,6 +27,7 @@ abstract public class InteractiveEntity : MonoBehaviour
         SetDurabilityMax();
         durability = durability_max;
         InteractiveEntity.total_durability += durability_max * 0.5f;
+        total_durability_max += durability_max * 0.5f;
         DrawUI();
     }
 
