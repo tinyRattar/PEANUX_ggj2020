@@ -14,7 +14,9 @@ public enum ToolType
     sewingKit,
     hammer,
     screwer,
-    spanner
+    spanner,
+    washKit,
+    band
 }
 
 public class PlayerCTRL : MonoBehaviour

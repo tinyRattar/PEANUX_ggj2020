@@ -10,13 +10,15 @@ abstract public class InteractiveEntity : MonoBehaviour
     float scratch_damage = 4;
     float pee_damage = 4;
     float uniform_damage = 4;
-    float repaired_ratio = 0.9;
-    [SerializeField] int sewingKit_required = 0;
-    [SerializeField] int hammer_required = 0;
-    [SerializeField] int screwer_required = 0;
-    [SerializeField] int spanner_required = 0;
+    float repaired_ratio = 0.9f;
+    [SerializeField] protected int sewingKit_required = 0;
+    [SerializeField] protected int hammer_required = 0;
+    [SerializeField] protected int screwer_required = 0;
+    [SerializeField] protected int spanner_required = 0;
+    [SerializeField] bool canAttack = true;
+    public bool AttackCheck() { return canAttack; }
     // Start is called before the first frame update
-    virtual void Start()
+    void Start()
     {
         
     }
@@ -29,14 +31,14 @@ abstract public class InteractiveEntity : MonoBehaviour
 
     public virtual bool OnInteract(KeyCode keyCode) {
         // OnInteract(keyCode, person.current_tool)
-
+        return false;
      }
 
     public virtual bool OnInteract(KeyCode keyCode, ToolType current_tool) {
-        if(Input.GetKeyDown(KeyCode.E)) {
+        if(keyCode == KeyCode.E) {
             return OnRepair(current_tool);
         }
-
+        return false;
      }
 
     // 纯虚函数，每个家具不一样
@@ -46,13 +48,13 @@ abstract public class InteractiveEntity : MonoBehaviour
 
     public virtual void OnCatInteract(CatAttackType type) {
         switch(type){
-            case bite:
+            case CatAttackType.bite:
                 durability -= bite_damage;
                 break;
-            case scratch:
+            case CatAttackType.scratch:
                 durability -= scratch_damage;
                 break;
-            case pee:
+            case CatAttackType.pee:
                 durability -= pee_damage;
                 break;
             default:
@@ -67,15 +69,15 @@ abstract public class InteractiveEntity : MonoBehaviour
         }
      }
 
-    virtual void SetDurabilityMax(){
+    public virtual void SetDurabilityMax(){
 
     }
 
-    virtual void OnTotalDamage(){
+    public virtual void OnTotalDamage(){
 
     }
 
-    virtual bool OnRepair(ToolType tool) { 
+    public virtual bool OnRepair(ToolType tool) { 
         if(isRequiredTool(tool)){
             
         }
@@ -87,31 +89,31 @@ abstract public class InteractiveEntity : MonoBehaviour
 
     bool isRequiredTool(ToolType tool){
         switch(tool){
-            case sewingKit:
+            case ToolType.sewingKit:
                 if (sewingKit_required>0){
                     sewingKit_required--;
-                    durability += uniform_damage*0.9;
+                    durability += uniform_damage*0.9f;
                     return true;
                 }
                 break;
-            case hammer:
+            case ToolType.hammer:
                 if (hammer_required>0){
                     hammer_required--;
-                    durability += uniform_damage*0.9;
+                    durability += uniform_damage*0.9f;
                     return true;
                 }
                 break;
-            case screwer:
+            case ToolType.screwer:
                 if (screwer_required>0){
                     screwer_required--;
-                    durability += uniform_damage*0.9;
+                    durability += uniform_damage*0.9f;
                     return true;
                 }
                 break;
-            case spanner:
+            case ToolType.spanner:
                 if (spanner_required>0){
                     spanner_required--;
-                    durability += uniform_damage*0.9;
+                    durability += uniform_damage*0.9f;
                     return true;
                 }
                 break;

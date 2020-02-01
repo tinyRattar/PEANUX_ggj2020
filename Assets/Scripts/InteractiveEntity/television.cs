@@ -16,12 +16,12 @@ public class Television : InteractiveEntity
         
     }
 
-    public override void OnInteract(KeyCode keyCode)
+    public override bool OnInteract(KeyCode keyCode)
     {
-        
+        return false;
     }
 
-    public void AddRequiredTool(){
+    public override void AddRequiredTool(){
         hammer_required++;
         screwer_required++;
     }
