@@ -4,19 +4,19 @@ using UnityEngine;
 
 abstract public class InteractiveEntity : MonoBehaviour
 {
-    [SerializeField] float durability = 30;
-    [SerializeField] float durability_max = 20;
+    [SerializeField] public float durability = 30;
+    [SerializeField] public float durability_max = 20;
     float bite_damage = 4;
     float scratch_damage = 4;
     float pee_damage = 4;
     float uniform_damage = 4;
-    float repaired_ratio = 0.9;
-    [SerializeField] int sewingKit_required = 0;
-    [SerializeField] int hammer_required = 0;
-    [SerializeField] int screwer_required = 0;
-    [SerializeField] int spanner_required = 0;
+    float repaired_ratio = 0.9f;
+    [SerializeField] public int sewingKit_required = 0;
+    [SerializeField] public int hammer_required = 0;
+    [SerializeField] public int screwer_required = 0;
+    [SerializeField] public int spanner_required = 0;
     // Start is called before the first frame update
-    virtual void Start()
+    public virtual void Start()
     {
         
     }
@@ -28,17 +28,18 @@ abstract public class InteractiveEntity : MonoBehaviour
     }
 
     public virtual bool OnInteract(KeyCode keyCode) {
-        // OnInteract(keyCode, person.current_tool)
-
-     }
+        return OnInteract(keyCode, PlayerCTRL.instance.cur_tool);
+    }
 
     public virtual bool OnInteract(KeyCode keyCode, ToolType current_tool) {
         if(Input.GetKeyDown(KeyCode.E)) {
             return OnRepair(current_tool);
         }
+        return false;
 
-     }
+    }
 
+    // 坏掉的时候所需要的工具
     // 纯虚函数，每个家具不一样
     public virtual void AddRequiredTool(){
         
@@ -46,13 +47,13 @@ abstract public class InteractiveEntity : MonoBehaviour
 
     public virtual void OnCatInteract(CatAttackType type) {
         switch(type){
-            case bite:
+            case CatAttackType.bite:
                 durability -= bite_damage;
                 break;
-            case scratch:
+            case CatAttackType.scratch:
                 durability -= scratch_damage;
                 break;
-            case pee:
+            case CatAttackType.pee:
                 durability -= pee_damage;
                 break;
             default:
@@ -67,51 +68,58 @@ abstract public class InteractiveEntity : MonoBehaviour
         }
      }
 
-    virtual void SetDurabilityMax(){
+    // 纯虚函数，家具的最大耐久度，每个家具不一样
+    public virtual void SetDurabilityMax(){
 
     }
 
-    virtual void OnTotalDamage(){
+    // 在完全被破坏的状态
+    public virtual void OnTotalDamage(){
 
     }
 
-    virtual bool OnRepair(ToolType tool) { 
+    public virtual bool OnRepair(ToolType tool) { 
         if(isRequiredTool(tool)){
-            
-        }
-        else{
-            return false;
+            return true;
         }
         return false; 
     }
 
     bool isRequiredTool(ToolType tool){
         switch(tool){
-            case sewingKit:
+            case ToolType.sewingKit:
                 if (sewingKit_required>0){
                     sewingKit_required--;
-                    durability += uniform_damage*0.9;
+                    durability += uniform_damage*0.9f;
+                    PlayerCTRL.instance.sewingKit_num--;
+                    PlayerCTRL.instance.cur_tool = ToolType.empty;
                     return true;
                 }
                 break;
-            case hammer:
+            case ToolType.hammer:
                 if (hammer_required>0){
                     hammer_required--;
-                    durability += uniform_damage*0.9;
+                    durability += uniform_damage*0.9f;
+                    PlayerCTRL.instance.hammer_num--;
+                    PlayerCTRL.instance.cur_tool = ToolType.empty;
                     return true;
                 }
                 break;
-            case screwer:
+            case ToolType.screwer:
                 if (screwer_required>0){
                     screwer_required--;
-                    durability += uniform_damage*0.9;
+                    durability += uniform_damage*0.9f;
+                    PlayerCTRL.instance.screwer_num--;
+                    PlayerCTRL.instance.cur_tool = ToolType.empty;
                     return true;
                 }
                 break;
-            case spanner:
+            case ToolType.spanner:
                 if (spanner_required>0){
                     spanner_required--;
-                    durability += uniform_damage*0.9;
+                    durability += uniform_damage*0.9f;
+                    PlayerCTRL.instance.spanner_num--;
+                    PlayerCTRL.instance.cur_tool = ToolType.empty;
                     return true;
                 }
                 break;

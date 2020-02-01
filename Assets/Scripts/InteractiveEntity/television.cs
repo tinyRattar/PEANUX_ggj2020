@@ -16,13 +16,14 @@ public class Television : InteractiveEntity
         
     }
 
-    public override void OnInteract(KeyCode keyCode)
-    {
-        
-    }
-
+   // 坏掉的时候所需要的工具
     public void AddRequiredTool(){
         hammer_required++;
         screwer_required++;
+    }
+
+    // 纯虚函数，家具的最大耐久度，每个家具不一样
+    public virtual void SetDurabilityMax(){
+        durability_max = 30.0f;
     }
 }
