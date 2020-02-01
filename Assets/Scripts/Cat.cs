@@ -21,15 +21,23 @@ public class Cat : MonoBehaviour
 {
     CatState state = CatState.idle;
     float timer = 0f;
+    Vector2 direction = Vector2.zero;
+    float moveTime = 1.0f;
+    int walkedCount = 0;
+    GameObject targetAttack;
+    [SerializeField] int maxRandomWalk = 4;
+    [SerializeField] float moveSpeed = 1.0f;
+    [SerializeField] float attackRange = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        NextActionDecide();
     }
 
     // cat behave
     void CatWalk()
     {
+
         // check attack
         // this.transform.Translate(v)
         // if moveover then NextActionDecide()
@@ -37,6 +45,28 @@ public class Cat : MonoBehaviour
 
     void NextActionDecide()
     {
+        if(walkedCount > maxRandomWalk)
+        {
+            // decide to attack
+            Collider2D[] colliderCollection = Physics2D.OverlapCircleAll(this.transform.position, attackRange);
+            foreach (var collider in colliderCollection)
+            {
+                if(collider.tag == "interact")
+                {
+                    targetAttack = collider.gameObject;
+                }
+            }
+        }
+        float r = Random.Range(0, 1.0f);
+        if (r < 0.5f)
+        {
+
+        }
+
+        float angle = Random.Range(0, 360);
+        direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+        moveTime = Random.Range(1f, 2f);
+        timer = moveTime;
         // get random direction
         // start attack if available  play attack anim. CatAttack()
         // set timer
