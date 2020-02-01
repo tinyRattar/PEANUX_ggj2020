@@ -580,12 +580,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c76447ce8ceb68548897087efdc01b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkedCount: 0
+  state: 0
   leastRandomWalk: 4
-  baseProb: 0.4
+  attackProb: 0.8
   perWalkProb: 0.1
+  restProb: 0.2
   moveSpeed: 1
-  attackRange: 2
+  attackRange: 1
 --- !u!212 &319844882
 SpriteRenderer:
   m_ObjectHideFlags: 0

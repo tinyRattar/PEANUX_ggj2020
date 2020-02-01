@@ -19,7 +19,7 @@ public enum CatState
 
 public class Cat : MonoBehaviour
 {
-    CatState state = CatState.idle;
+    [SerializeField]CatState state = CatState.idle;
     float timer = 0f;
     Vector2 direction = Vector2.zero;
     float moveTime = 1.0f;
@@ -27,13 +27,13 @@ public class Cat : MonoBehaviour
     int walkedCount = 0;
     GameObject targetAttack;
     [SerializeField] int leastRandomWalk = 4;
-    [SerializeField] int attackProb = 0.8f;
+    [SerializeField] float attackProb = 0.8f;
     
     //[SerializeField] float baseProb = 0.4f;
     [SerializeField] float perWalkProb = 0.2f;
     [SerializeField] float restProb = 0.2f;
     [SerializeField] float moveSpeed = 1.0f;
-    [SerializeField] float attackRange = 2.0f;
+    [SerializeField] float attackRange = 1.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,10 +45,10 @@ public class Cat : MonoBehaviour
     {
         Vector2 nextPos = this.transform.position;
         nextPos += direction * moveSpeed * Time.deltaTime;
-        if (TryAttack(nextPos))
-        {
-            return;
-        }
+        //if (TryAttack(nextPos))
+        //{
+        //    return;
+        //}
         this.transform.position = nextPos;
     }
 
@@ -59,14 +59,15 @@ public class Cat : MonoBehaviour
 
         if (walkedCount >= leastRandomWalk)
         {
-            float p = Random.Range(0.5f, 1.0f);
+            float p = Random.Range(0.5f, 1f);
             r1 = walkedCount * perWalkProb * p;
         }
-        
+        Debug.Log(r1);
         if (r1 > attackProb)
         {
             if (TryAttack(this.transform.position))
             {
+                walkedCount = 0;
                 return;
             }
         }
@@ -78,6 +79,7 @@ public class Cat : MonoBehaviour
             moveTime = Random.Range(1f, 2f);
             timer = moveTime;
             state = CatState.walk;
+            walkedCount++;
         }
         else
         {
