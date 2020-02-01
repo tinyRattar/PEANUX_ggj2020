@@ -6,10 +6,10 @@ abstract public class InteractiveEntity : MonoBehaviour
 {
     [SerializeField] public float durability = 30;
     [SerializeField] public float durability_max = 20;
-    float bite_damage = 4;
-    float scratch_damage = 4;
-    float pee_damage = 4;
-    float uniform_damage = 4;
+    protected float bite_damage = 4;
+    protected float scratch_damage = 4;
+    protected float pee_damage = 4;
+    protected float uniform_damage = 4;
     float repaired_ratio = 0.9f;
     [SerializeField] public int sewingKit_required = 0;
     [SerializeField] public int hammer_required = 0;
