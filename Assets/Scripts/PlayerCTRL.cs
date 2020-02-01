@@ -71,39 +71,64 @@ public class PlayerCTRL : MonoBehaviour
             }
         }else if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if(sewingKit_num > 0){
+            if(cur_tool == ToolType.sewingKit){
+                cur_tool = ToolType.empty;
+            }
+            
+            else if(sewingKit_num > 0){
               cur_tool = ToolType.sewingKit;
             }
+
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             
-            if(hammer_num > 0){
+            if(cur_tool == ToolType.hammer){
+                cur_tool = ToolType.empty;
+            }
+            
+            else if(hammer_num > 0){
                 cur_tool = ToolType.hammer;
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if(screwer_num > 0){
+            if(cur_tool == ToolType.screwer){
+                cur_tool = ToolType.empty;
+            }
+            
+            else if(screwer_num > 0){
                 cur_tool = ToolType.screwer;
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            if(spanner_num > 0){
+            if(cur_tool == ToolType.spanner){
+                cur_tool = ToolType.empty;
+            }
+            
+            else if(spanner_num > 0){
                 cur_tool = ToolType.spanner;
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            if(washKit_num > 0)
+            if(cur_tool == ToolType.washKit){
+                cur_tool = ToolType.empty;
+            }
+            
+            else if(washKit_num > 0)
             {
                 cur_tool = ToolType.washKit;
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            if(band_num > 0)
+            if(cur_tool == ToolType.band){
+                cur_tool = ToolType.empty;
+            }
+            
+            else if(band_num > 0)
             {
                 cur_tool = ToolType.band;
             }

@@ -15,6 +15,8 @@ abstract public class InteractiveEntity : MonoBehaviour
     [SerializeField] public int hammer_required = 0;
     [SerializeField] public int screwer_required = 0;
     [SerializeField] public int spanner_required = 0;
+    [SerializeField] public int washKit_required = 0;
+    [SerializeField] public int band_required = 0; //6
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -26,6 +28,8 @@ abstract public class InteractiveEntity : MonoBehaviour
     {
         
     }
+    
+    
 
     public virtual bool OnInteract(KeyCode keyCode) {
         return OnInteract(keyCode, PlayerCTRL.instance.cur_tool);
@@ -39,9 +43,10 @@ abstract public class InteractiveEntity : MonoBehaviour
 
     }
 
+    
+    public virtual void AddRequiredTool(){
     // 坏掉的时候所需要的工具
     // 纯虚函数，每个家具不一样
-    public virtual void AddRequiredTool(){
         
     }
 
@@ -64,13 +69,22 @@ abstract public class InteractiveEntity : MonoBehaviour
             OnTotalDamage();
         }
         else{
-            AddRequiredTool();
+            if(type == CatAttackType.pee){
+                AddCleaningTool();
+            }
+            else{
+                AddRequiredTool();
+            }
         }
      }
 
     // 纯虚函数，家具的最大耐久度，每个家具不一样
     public virtual void SetDurabilityMax(){
 
+    }
+
+    public void AddCleaningTool(){
+        washKit_required++;
     }
 
     // 在完全被破坏的状态
@@ -85,7 +99,7 @@ abstract public class InteractiveEntity : MonoBehaviour
         return false; 
     }
 
-    bool isRequiredTool(ToolType tool){
+    public bool isRequiredTool(ToolType tool){
         switch(tool){
             case ToolType.sewingKit:
                 if (sewingKit_required>0){
@@ -128,6 +142,47 @@ abstract public class InteractiveEntity : MonoBehaviour
                 break;
         }
         return false;
+    }
+
+    public void RandomChoiceMechTools(){
+      // 机械的损伤，从Hammer,spanner, screwer中挑选
+      // 会从 Hammer, spanner, screwer中挑选
+        int rand_choice = Random.Range(0,3);
+        switch(rand_choice){
+          case 0:
+            hammer_required++;
+            break;
+          case 1:
+            spanner_required++;
+            break;
+          case 2:
+            screwer_required++;
+            break;
+          default:
+            break;
+        }
+        return;
+    }
+
+    public void RandomChoiceDecorateTools(){
+      // 机械的损伤，从Hammer,spanner, screwer中挑选
+      // 会从 Hammer, spanner, screwer中挑选
+        int rand_choice = Random.Range(0,2);
+        switch(rand_choice){
+          case 0:
+            sewingKit_required++;
+            break;
+          case 1:
+            washKit_required++;
+            break;
+          default:
+            break;
+        }
+        return;
+    }
+
+    public void RandomChoiceLifeTools(){
+
     }
 
     public virtual void DrawUI()
