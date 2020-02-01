@@ -22,11 +22,13 @@ public class Computer : InteractiveEntity
     void OpenShop()
     {
         ui_shop.SetActive(true);
+        shopOpen = true;
     }
 
     void CloseShop()
     {
         ui_shop.SetActive(false);
+        shopOpen = false;
     }
 
     public override bool OnInteract(KeyCode keyCode)
@@ -38,11 +40,17 @@ public class Computer : InteractiveEntity
         }else if(keyCode == KeyCode.F)
         {
             if(shopOpen)
-                OpenShop();
-            else
                 CloseShop();
+            else
+                OpenShop();
             return false;
         }
         return false;
+    }
+
+    public override void OnPlayerExit()
+    {
+        base.OnPlayerExit();
+        CloseShop();
     }
 }

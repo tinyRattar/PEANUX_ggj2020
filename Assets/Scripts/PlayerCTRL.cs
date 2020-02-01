@@ -55,6 +55,13 @@ public class PlayerCTRL : MonoBehaviour
                 item.OnInteract(KeyCode.E);
                 break;
             }
+        }else if (Input.GetKeyDown(KeyCode.F))
+        {
+            foreach (var item in attachedEntities)
+            {
+                item.OnInteract(KeyCode.F);
+                break;
+            }
         }else if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             // use tool 1
@@ -78,7 +85,9 @@ public class PlayerCTRL : MonoBehaviour
     {
         if (collision.tag == "interact")
         {
-            attachedEntities.Remove(collision.GetComponent<InteractiveEntity>());
+            InteractiveEntity cie = collision.GetComponent<InteractiveEntity>();
+            attachedEntities.Remove(cie);
+            cie.OnPlayerExit();
         }
     }
 }

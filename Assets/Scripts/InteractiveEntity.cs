@@ -129,6 +129,6 @@ abstract public class InteractiveEntity : MonoBehaviour
         
     }
 
-
+    public virtual void OnPlayerExit() { }
 
 }
