@@ -7,7 +7,7 @@ public class Plant : InteractiveEntity
     // Start is called before the first frame update
     void Start()
     {
-        
+        Init();
     }
 
     // Update is called once per frame
@@ -17,12 +17,12 @@ public class Plant : InteractiveEntity
     }
 
    // 坏掉的时候所需要的工具
-    public void AddRequiredTool(){
+    public override void AddRequiredTool(){
         return; // 花无法回复，只能通过pee来回复durability
     }
 
     // 纯虚函数，家具的最大耐久度，每个家具不一样
-    public virtual void SetDurabilityMax(){
+    public override void SetDurabilityMax(){
         durability_max = 20.0f;
     }
 

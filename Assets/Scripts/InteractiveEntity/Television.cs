@@ -7,7 +7,7 @@ public class Television : InteractiveEntity
     // Start is called before the first frame update
     void Start()
     {
-        
+        Init();
     }
 
     // Update is called once per frame
@@ -28,12 +28,12 @@ public class Television : InteractiveEntity
     }
 
    // 坏掉的时候所需要的工具
-    public void AddRequiredTool(){
+    public override void AddRequiredTool(){
         RandomChoiceMechTools();
     }
 
     // 纯虚函数，家具的最大耐久度，每个家具不一样
-    public virtual void SetDurabilityMax(){
+    public override void SetDurabilityMax(){
         durability_max = 30.0f;
     }
 }
