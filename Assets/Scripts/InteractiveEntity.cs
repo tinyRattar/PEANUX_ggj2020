@@ -17,10 +17,12 @@ abstract public class InteractiveEntity : MonoBehaviour
     [SerializeField] public int spanner_required = 0;
     [SerializeField] public int washKit_required = 0;
     [SerializeField] public int band_required = 0; //6
+    [SerializeField] bool canAttack = true;
+    public bool AttackCheck() { return canAttack; }
     // Start is called before the first frame update
-    public virtual void Start()
+    void Start()
     {
-        
+        DrawUI();
     }
 
     // Update is called once per frame
@@ -36,11 +38,10 @@ abstract public class InteractiveEntity : MonoBehaviour
     }
 
     public virtual bool OnInteract(KeyCode keyCode, ToolType current_tool) {
-        if(Input.GetKeyDown(KeyCode.E)) {
+        if (keyCode == KeyCode.E) {
             return OnRepair(current_tool);
         }
         return false;
-
     }
 
     
@@ -92,7 +93,7 @@ abstract public class InteractiveEntity : MonoBehaviour
 
     }
 
-    public virtual bool OnRepair(ToolType tool) { 
+    public virtual bool OnRepair(ToolType tool) {
         if(isRequiredTool(tool)){
             return true;
         }
@@ -187,9 +188,9 @@ abstract public class InteractiveEntity : MonoBehaviour
 
     public virtual void DrawUI()
     {
-        
+        Resources.Load<Sprite>("ui/hammer_01.png");
     }
 
-
+    public virtual void OnPlayerExit() { }
 
 }
