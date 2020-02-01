@@ -7,7 +7,7 @@ public class Fan : InteractiveEntity
     // Start is called before the first frame update
     void Start()
     {
-        Init();
+        SetDurabilityMax();
     }
 
     // Update is called once per frame
@@ -17,12 +17,12 @@ public class Fan : InteractiveEntity
     }
 
    // 坏掉的时候所需要的工具
-    public override void AddRequiredTool(){
+    public void AddRequiredTool(){
         RandomChoiceMechTools(); // 花无法回复，只能通过pee来回复durability
     }
 
     // 纯虚函数，家具的最大耐久度，每个家具不一样
-    public override void SetDurabilityMax(){
+    public virtual void SetDurabilityMax(){
         durability_max = 30.0f;
     }
 

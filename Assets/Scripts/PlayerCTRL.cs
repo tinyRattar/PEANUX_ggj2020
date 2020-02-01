@@ -6,7 +6,9 @@ public enum playerState
 {
     idle,
     work,
-    repair
+    repair,
+    summonCat,
+    servingCat, // 和猫玩耍时的状态，在猫玩耍玩之前，无法解除
 }
 
 public enum ToolType
@@ -17,7 +19,8 @@ public enum ToolType
     screwer, //3
     spanner, //4
     washKit, //5
-    band //6
+    band, //6
+    catToy
 }
 
 public class PlayerCTRL : MonoBehaviour
@@ -34,8 +37,9 @@ public class PlayerCTRL : MonoBehaviour
     [SerializeField] public int spanner_num = 5;
     [SerializeField] public int washKit_num = 5;
     [SerializeField] public int band_num = 5;
-
+    [SerializeField] public int club_num = 5;
     [SerializeField] public ToolType cur_tool = ToolType.empty;
+    
 
     playerState state = playerState.idle;
     List<InteractiveEntity> attachedEntities = new List<InteractiveEntity>();
@@ -46,7 +50,8 @@ public class PlayerCTRL : MonoBehaviour
     }
 
     public int GetMoney() { return this.money; }
-
+    public playerState GetState() {return this.state; }
+    public void SetState(playerState wished_state) {this.state=wished_state;}
     public int GetToolNum(int index)
     {
         switch (index)
@@ -107,17 +112,31 @@ public class PlayerCTRL : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if( cur_tool == ToolType.empty){
+            state = playerState.idle;
+        }
+        if( state == playerState.servingCat){
+            return;
+        }
         float dx = Input.GetAxis("Horizontal");
         float dy = Input.GetAxis("Vertical");
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, interactRange);
-            foreach (var item in colliders)
+            if(cur_tool == ToolType.catToy){
+                state = playerState.summonCat;
+            }
+            else
             {
-                if (item.tag != "interact") continue;
-                item.GetComponent<InteractiveEntity>().OnInteract(KeyCode.E);
-                break;
+                state = playerState.idle;
+
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, interactRange);
+                foreach (var item in colliders)
+                {
+                    if (item.tag != "interact") continue;
+                    item.GetComponent<InteractiveEntity>().OnInteract(KeyCode.E);
+                    break;
+                }
             }
         }else if (Input.GetKeyDown(KeyCode.F))
         {
@@ -190,6 +209,16 @@ public class PlayerCTRL : MonoBehaviour
             else if(band_num > 0)
             {
                 cur_tool = ToolType.band;
+            }
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            if(cur_tool == ToolType.catToy){
+                cur_tool = ToolType.empty;
+            }
+            else if(band_num > 0)
+            {
+                cur_tool = ToolType.catToy;
             }
         }
         

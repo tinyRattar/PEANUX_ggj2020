@@ -10,7 +10,7 @@ public class Computer : InteractiveEntity
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetDurabilityMax();
     }
 
     // Update is called once per frame
