@@ -23,7 +23,10 @@ public class btnPurchase : MonoBehaviour
         this.GetComponentInChildren<Text>().text = "$ " + price.ToString();
     }
 
-    public virtual void DealPurchase() { }
+    public virtual void DealPurchase()
+    {
+        SEManager.Instance.PlaySE(1);
+    }
 
     public void OnClick()
     {

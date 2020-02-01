@@ -36,6 +36,8 @@ public class Computer : InteractiveEntity
         if(keyCode == KeyCode.E)
         {
             PlayerCTRL.instance.AddMoney(perGenMoney);
+            BGMManager.Instance.setBGM(0);
+            //SEManager.Instance.PlaySE(0);
             return false;
         }else if(keyCode == KeyCode.F)
         {

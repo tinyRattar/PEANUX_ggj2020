@@ -19,6 +19,7 @@ public class btnPurchaseTool : btnPurchase
 
     public override void DealPurchase()
     {
+        base.DealPurchase();
         Debug.LogError("todo: no implement");
     }
 }

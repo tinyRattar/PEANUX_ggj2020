@@ -62,7 +62,6 @@ public class Cat : MonoBehaviour
             float p = Random.Range(0.5f, 1f);
             r1 = walkedCount * perWalkProb * p;
         }
-        Debug.Log(r1);
         if (r1 > attackProb)
         {
             if (TryAttack(this.transform.position))
