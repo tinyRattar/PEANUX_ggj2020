@@ -4,6 +4,7 @@ using UnityEngine;
 
 abstract public class InteractiveEntity : MonoBehaviour
 {
+    [SerializeField] static public float total_durability = 0.0f;
     [SerializeField] public float durability = 30;
     [SerializeField] public float durability_max = 20;
     protected float bite_damage = 4;
@@ -23,6 +24,8 @@ abstract public class InteractiveEntity : MonoBehaviour
     public void Init()
     {
         SetDurabilityMax();
+        durability = durability_max;
+        InteractiveEntity.total_durability += durability_max * 0.5f;
         DrawUI();
     }
 
@@ -46,7 +49,8 @@ abstract public class InteractiveEntity : MonoBehaviour
     }
 
     public virtual void OnCatInteract(CatAttackType type) {
-        switch(type){
+        total_durability -= uniform_damage;
+        switch (type){
             case CatAttackType.bite:
                 durability -= bite_damage;
                 break;
@@ -102,6 +106,7 @@ abstract public class InteractiveEntity : MonoBehaviour
                 if (sewingKit_required>0){
                     sewingKit_required--;
                     durability += uniform_damage*0.9f;
+                    total_durability += uniform_damage * 0.9f;
                     PlayerCTRL.instance.sewingKit_num--;
                     PlayerCTRL.instance.cur_tool = ToolType.empty;
                     return true;
@@ -111,6 +116,7 @@ abstract public class InteractiveEntity : MonoBehaviour
                 if (hammer_required>0){
                     hammer_required--;
                     durability += uniform_damage*0.9f;
+                    total_durability += uniform_damage * 0.9f;
                     PlayerCTRL.instance.hammer_num--;
                     PlayerCTRL.instance.cur_tool = ToolType.empty;
                     return true;
@@ -120,6 +126,7 @@ abstract public class InteractiveEntity : MonoBehaviour
                 if (screwer_required>0){
                     screwer_required--;
                     durability += uniform_damage*0.9f;
+                    total_durability += uniform_damage * 0.9f;
                     PlayerCTRL.instance.screwer_num--;
                     PlayerCTRL.instance.cur_tool = ToolType.empty;
                     return true;
@@ -129,6 +136,7 @@ abstract public class InteractiveEntity : MonoBehaviour
                 if (spanner_required>0){
                     spanner_required--;
                     durability += uniform_damage*0.9f;
+                    total_durability += uniform_damage * 0.9f;
                     PlayerCTRL.instance.spanner_num--;
                     PlayerCTRL.instance.cur_tool = ToolType.empty;
                     return true;
@@ -139,6 +147,7 @@ abstract public class InteractiveEntity : MonoBehaviour
                 {
                     washKit_required--;
                     durability += uniform_damage * 0.9f;
+                    total_durability += uniform_damage * 0.9f;
                     PlayerCTRL.instance.washKit_num--;
                     PlayerCTRL.instance.cur_tool = ToolType.empty;
                     return true;
@@ -225,7 +234,6 @@ abstract public class InteractiveEntity : MonoBehaviour
             if (index == listBubbles.Count) { listBubbles[index].GetComponent<bubble>().SetToolsMore(); }
             else { listBubbles[index++].GetComponent<bubble>().SetTool(ToolType.washKit); }
         }
-        Debug.Log(index);
         for (int i = 0; i < index; i++)
         {
             listBubbles[i].GetComponent<bubble>().SetVisible();
