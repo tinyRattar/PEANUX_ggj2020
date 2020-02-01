@@ -4,7 +4,7 @@ using UnityEngine;
 
 abstract public class InteractiveEntity : MonoBehaviour
 {
-    bool canAttack = true;
+    [SerializeField] bool canAttack = true;
     public bool AttackCheck() { return canAttack; }
     // Start is called before the first frame update
     void Start()

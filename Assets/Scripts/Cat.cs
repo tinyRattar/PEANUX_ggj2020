@@ -24,7 +24,7 @@ public class Cat : MonoBehaviour
     Vector2 direction = Vector2.zero;
     float moveTime = 1.0f;
     float attackTime = 1.0f;
-    int walkedCount = 0;
+    [SerializeField]int walkedCount = 0;
     GameObject targetAttack;
     [SerializeField] int leastRandomWalk = 4;
     [SerializeField] float baseProb = 0.4f;
@@ -42,10 +42,14 @@ public class Cat : MonoBehaviour
     {
         Vector2 nextPos = this.transform.position;
         nextPos += direction * moveSpeed * Time.deltaTime;
-        if (TryAttack(nextPos))
+        if (walkedCount > leastRandomWalk)
         {
-            return;
-        }
+            if (TryAttack(nextPos))
+            {
+                walkedCount = 0;
+                return;
+            }
+        }  
         this.transform.position = nextPos;
     }
 
@@ -61,6 +65,7 @@ public class Cat : MonoBehaviour
         {
             if (TryAttack(this.transform.position))
             {
+                walkedCount = 0;
                 return;
             }
         }
@@ -72,10 +77,11 @@ public class Cat : MonoBehaviour
             moveTime = Random.Range(1f, 2f);
             timer = moveTime;
             state = CatState.walk;
+            walkedCount++;
         }
         else
         {
-            float idleTime = Random.Range(1f, 2f);
+            float idleTime = Random.Range(0.5f, 1f);
             timer = idleTime;
             state = CatState.idle;
         }
@@ -119,6 +125,7 @@ public class Cat : MonoBehaviour
                 CatWalk();
                 break;
             case CatState.attack:
+                Debug.Log("in attacking");
                 // attack timer
                 // if attackover then NextActionDecide()
                 break;
