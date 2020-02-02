@@ -51,7 +51,7 @@ public class Cat : MonoBehaviour
 
     [SerializeField] Transform furniture;
 
-    float happyValue = 25f;
+    [SerializeField]float happyValue = 25f;
     float happyDecayTimer = 10f;
     [SerializeField] float happyDecayTime = 10f;
     [SerializeField] float happyDecayRate = 1f;

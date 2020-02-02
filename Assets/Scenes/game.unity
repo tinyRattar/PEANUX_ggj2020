@@ -15703,6 +15703,11 @@ PrefabInstance:
       propertyPath: furniture
       value: 
       objectReference: {fileID: 1801016116}
+    - target: {fileID: 4372641011312865622, guid: 7bbcba4ca6179304b9fadb7bde7b7c7b,
+        type: 3}
+      propertyPath: happyIncreaseRate
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4372641011312865623, guid: 7bbcba4ca6179304b9fadb7bde7b7c7b,
         type: 3}
       propertyPath: m_Name
