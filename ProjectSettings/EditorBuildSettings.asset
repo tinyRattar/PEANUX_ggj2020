@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/mainMenu.unity
+    guid: 4bf1e67aac07d8c43bcf4aa1cdd581ff
+  - enabled: 1
     path: Assets/Scenes/debug.unity
     guid: 40c9a5b1eb194db48b42c86efb226066
+  - enabled: 1
+    path: Assets/Scenes/gameover.unity
+    guid: ff46f446e618eb2499b334229d452c9d
+  - enabled: 1
+    path: Assets/Scenes/he_goldfood.unity
+    guid: b092bce845430b44589f4a65f9dee5ee
+  - enabled: 1
+    path: Assets/Scenes/he_happycat.unity
+    guid: b9b48166ae3dbb34a922c417b650d8de
   m_configObjects: {}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public enum CatAttackType
@@ -47,13 +48,23 @@ public class Cat : MonoBehaviour
     [SerializeField] float directlyWalkProb = 0.5f;
 
     [SerializeField] Transform furniture;
+
+    float happyValue = 25f;
+    float happyDecayTimer = 10f;
+    [SerializeField] float happyDecayTime = 10f;
+    [SerializeField] float happyDecayRate = 1f;
+    [SerializeField] float happyIncreaseRate = 1f;
     int furnitureCount;
+
+    [SerializeField] Animator animator;
+    SpriteRenderer srCat;
     // Start is called before the first frame update
     void Start()
     {
-        NextActionDecide();
+        // NextActionDecide();
         furniture = GameObject.Find("Furniture").transform;
         furnitureCount = furniture.childCount;
+        srCat = this.GetComponentInChildren<SpriteRenderer>();
     }
 
     // cat behave
@@ -116,7 +127,7 @@ public class Cat : MonoBehaviour
         }
     }
 
-    bool TryAttack(Vector2 pos, CatAttackType attackType = CatAttackType.bite)
+    bool TryAttack(Vector2 pos)
     {
         Collider2D[] colliderCollection = Physics2D.OverlapCircleAll(pos, attackRange);
         foreach (var collider in colliderCollection)
@@ -127,7 +138,18 @@ public class Cat : MonoBehaviour
                 InteractiveEntity targetAttack_ie = targetAttack.GetComponent<InteractiveEntity>();
                 if (targetAttack_ie.AttackCheck())
                 {
-                    CatAttack(targetAttack_ie, CatAttackType.bite);
+                    int r = Random.Range(0, 4);
+                    CatAttackType attackType = CatAttackType.bite;
+                    if (r < 2)
+                    {
+                        attackType = CatAttackType.pee;
+                        animator.SetInteger("catAtkType", 2);
+                    }
+                    else
+                    {
+                        animator.SetInteger("catAtkType", r-3);
+                    }
+                    CatAttack(targetAttack_ie, attackType);
                     return true;
                 }
             }
@@ -149,19 +171,24 @@ public class Cat : MonoBehaviour
         switch (state)
         {
             case CatState.idle:
+                animator.SetInteger("catState", 0);
                 // pass
                 break;
             case CatState.walk:
+                animator.SetInteger("catState", 1);
                 CatWalk();
                 break;
             case CatState.directlywalk:
+                animator.SetInteger("catState", 1);
                 CatWalk();
                 break;
             case CatState.attack:
+                animator.SetInteger("catState", 2);
                 // attack timer
                 // if attackover then NextActionDecide()
                 break;
             case CatState.beLoved:
+                animator.SetInteger("catState", 4);
                 OnBeLoved();
                 Debug.Log("In Love");
                 return;
@@ -205,6 +232,32 @@ public class Cat : MonoBehaviour
                 fooled_nums = 0;
             }
         }
+
+        if (direction.x > 0)
+            srCat.flipX = true;
+        else
+            srCat.flipX = false;
+
+        // happy decay
+        if (happyDecayTimer > 0)
+        {
+            happyDecayTimer -= Time.deltaTime;
+        }
+        else
+        {
+            happyValue -= happyDecayRate * Time.deltaTime;
+            if (happyValue < 0)
+            {
+                happyValue = 0;
+            }
+        }
+        if (happyValue > 100)
+        {
+            Debug.Log("Cat is very happy");
+            SceneManager.LoadScene(4);
+        }
+
+        // todo: atkProb set by happyValue;
     }
 
     void CheckFooled()
@@ -238,8 +291,9 @@ public class Cat : MonoBehaviour
         started_run_to_player_flag = true;
         Vector2 desPos = playerPos;
         Vector2 curPos = this.transform.position;
-        Vector2 direction = (desPos - curPos).normalized;
+        direction = (desPos - curPos).normalized;
         Vector2 nextPos = curPos + direction * 4 * moveSpeed * Time.deltaTime;
+        state = CatState.walk;
 
         this.transform.position = nextPos;
     }
@@ -272,6 +326,8 @@ public class Cat : MonoBehaviour
         PlayerCTRL.instance.SetState(playerState.servingCat);
         // change timer
         catPlayTimer = catPlayTimer - Time.deltaTime;
+        happyValue += happyIncreaseRate * Time.deltaTime;
+        happyDecayTimer = happyDecayTime;
         if (catPlayTimer < 0)
         {
             state = CatState.walk;

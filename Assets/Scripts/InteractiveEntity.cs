@@ -8,6 +8,7 @@ abstract public class InteractiveEntity : MonoBehaviour
     [SerializeField] static public float total_durability_max = 0.0f;
     [SerializeField] public float durability = 30;
     [SerializeField] public float durability_max = 20;
+    [SerializeField] float brokenThresh = 0.6f;
     protected float bite_damage = 4;
     protected float scratch_damage = 4;
     protected float pee_damage = 4;
@@ -22,6 +23,9 @@ abstract public class InteractiveEntity : MonoBehaviour
     [SerializeField] bool canAttack = true;
     public bool AttackCheck() { return canAttack; }
     [SerializeField] List<GameObject> listBubbles;
+    [SerializeField] Sprite spGood;
+    [SerializeField] Sprite spBroken;
+    [SerializeField] SpriteRenderer sr; 
     public void Init()
     {
         SetDurabilityMax();
@@ -29,6 +33,13 @@ abstract public class InteractiveEntity : MonoBehaviour
         InteractiveEntity.total_durability += durability_max * 0.5f;
         total_durability_max += durability_max * 0.5f;
         DrawUI();
+        bubble[] bubbles = this.GetComponentsInChildren<bubble>();
+        listBubbles = new List<GameObject>();
+        foreach (var item in bubbles)
+        {
+            listBubbles.Add(item.gameObject);
+        }
+        //sr = this.GetComponentInChildren<SpriteRenderer>();
     }
 
     public virtual bool OnInteract(KeyCode keyCode) {
@@ -217,7 +228,6 @@ abstract public class InteractiveEntity : MonoBehaviour
         }
         if (hammer_required > 0)
         {
-            Debug.Log("hammer require");
             if (index == listBubbles.Count) { listBubbles[index].GetComponent<bubble>().SetToolsMore(); }
             else { listBubbles[index++].GetComponent<bubble>().SetTool(ToolType.hammer); }
         }
@@ -239,6 +249,15 @@ abstract public class InteractiveEntity : MonoBehaviour
         for (int i = 0; i < index; i++)
         {
             listBubbles[i].GetComponent<bubble>().SetVisible();
+        }
+
+        if (durability / durability_max < brokenThresh)
+        {
+            sr.sprite = spBroken;
+        }
+        else
+        {
+            sr.sprite = spGood;
         }
     }
 

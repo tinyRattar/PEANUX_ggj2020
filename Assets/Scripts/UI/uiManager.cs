@@ -26,6 +26,8 @@ public class uiManager : MonoBehaviour
             else
                 uiTools[i].DisSelect();
         }
+        if (PlayerCTRL.instance.cur_tool == ToolType.catToy)
+            uiTools[5].EnSelect();
         processBar.fillAmount = InteractiveEntity.total_durability / InteractiveEntity.total_durability_max;
     }
 }

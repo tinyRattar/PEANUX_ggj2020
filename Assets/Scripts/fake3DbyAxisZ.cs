@@ -11,7 +11,7 @@ public class fake3DbyAxisZ : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LastUpdate()
+    void Update()
     {
         Vector3 oldPos = this.transform.position;
         oldPos.z = oldPos.y;

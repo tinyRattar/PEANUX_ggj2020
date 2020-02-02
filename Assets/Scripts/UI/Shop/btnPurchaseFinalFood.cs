@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class btnPurchaseFinalFood : btnPurchase
 {
@@ -18,6 +19,6 @@ public class btnPurchaseFinalFood : btnPurchase
 
     public override void DealPurchase()
     {
-        Debug.Log("You Win!!!!!!!!");
+        SceneManager.LoadScene(3);
     }
 }

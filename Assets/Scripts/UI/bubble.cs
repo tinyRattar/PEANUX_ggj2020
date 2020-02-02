@@ -41,7 +41,7 @@ public class bubble : MonoBehaviour
 
     public void SetToolsMore()
     {
-        srTool.sprite = Resources.Load<Sprite>("ui/screwer_01.png"); //todo: icon for more
+        srTool.sprite = ResourceManager.instance.sprites[6];
     }
 
     public void SetInvisible()
