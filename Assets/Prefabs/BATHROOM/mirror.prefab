@@ -246,6 +246,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8727170295854674114}
+  - component: {fileID: 3040810085347525989}
   - component: {fileID: 6874688805391369701}
   - component: {fileID: 8727170295854674112}
   - component: {fileID: 8727170295854674115}
@@ -274,6 +275,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3040810085347525989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8727170295854674119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ddef109ca697b4f8fb3af63aff9ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  durability: 30
+  durability_max: 20
+  sewingKit_required: 0
+  hammer_required: 0
+  screwer_required: 0
+  spanner_required: 0
+  washKit_required: 0
+  band_required: 0
+  canAttack: 1
+  listBubbles:
+  - {fileID: 8727170296563167899}
+  - {fileID: 8727170296209668643}
+  - {fileID: 8727170295913783520}
+  spGood: {fileID: 21300000, guid: 89a2d42701d58cb4bae98e89233ae0e3, type: 3}
+  spBroken: {fileID: 21300000, guid: 5a99c0a2458ad9e4b8c1facf3d1e4a60, type: 3}
+  sr: {fileID: 0}
 --- !u!114 &6874688805391369701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +317,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   durability: 30
   durability_max: 20
-  brokenThresh: 0.6
   sewingKit_required: 0
   hammer_required: 0
   screwer_required: 0

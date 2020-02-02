@@ -256,6 +256,16 @@ public class PlayerCTRL : MonoBehaviour
 
     void UpdateAnim(float dx, float dy)
     {
+        if (state == playerState.repair)
+        {
+            animator.SetInteger("playerState", -1);
+            return;
+        }
+        if (state == playerState.servingCat)
+        {
+            animator.SetInteger("playerState", -2);
+            return;
+        }
         sr.flipX = dx > 0;
         if (Mathf.Abs(dx) < 0.1f && Mathf.Abs(dy) < 0.1f)
         {
@@ -293,6 +303,7 @@ public class PlayerCTRL : MonoBehaviour
             {
                 inComputer = false;
                 animator.SetBool("inComputer", false);
+                collision.GetComponent<InteractiveEntity>().OnPlayerExit();
             }
         }
     }

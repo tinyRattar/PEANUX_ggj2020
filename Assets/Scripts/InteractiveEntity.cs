@@ -9,7 +9,7 @@ abstract public class InteractiveEntity : MonoBehaviour
     [SerializeField] static public float total_durability_max = 0.0f;
     [SerializeField] public float durability = 30;
     [SerializeField] public float durability_max = 20;
-    [SerializeField] float brokenThresh = 0.6f;
+    float brokenThresh = 0.9f;
     protected float bite_damage = 4;
     protected float scratch_damage = 4;
     protected float pee_damage = 4;
@@ -31,8 +31,8 @@ abstract public class InteractiveEntity : MonoBehaviour
     {
         SetDurabilityMax();
         durability = durability_max;
-        InteractiveEntity.total_durability += durability_max * 0.5f;
-        total_durability_max += durability_max * 0.5f;
+        InteractiveEntity.total_durability += durability_max * 0.2f;
+        total_durability_max += durability_max * 0.2f;
         DrawUI();
         bubble[] bubbles = this.GetComponentsInChildren<bubble>();
         listBubbles = new List<GameObject>();
@@ -257,8 +257,13 @@ abstract public class InteractiveEntity : MonoBehaviour
         }
         if (washKit_required > 0)
         {
+            sr.color = new Color(1f, 1f, 1 - washKit_required / 3f);
             if (index == listBubbles.Count) { listBubbles[index].GetComponent<bubble>().SetToolsMore(); }
             else { listBubbles[index++].GetComponent<bubble>().SetTool(ToolType.washKit); }
+        }
+        else
+        {
+            sr.color = new Color(1f, 1f, 1f);
         }
         for (int i = 0; i < index; i++)
         {
