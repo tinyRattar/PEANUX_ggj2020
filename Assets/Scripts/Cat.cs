@@ -172,7 +172,7 @@ public class Cat : MonoBehaviour
                 // Debug.Log("In Love");
                 if(needCatMeow){
                   Debug.Log("meow");
-                  SEManager.Instance.PlaySE(10);
+                  SEManager.Instance.PlaySE(22);
                   needCatMeow=false;
                 }
 

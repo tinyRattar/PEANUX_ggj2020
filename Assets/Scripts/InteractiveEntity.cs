@@ -66,10 +66,14 @@ abstract public class InteractiveEntity : MonoBehaviour
                 break;
         }
         if(durability <= 0){
+            SEManager.Instance.PlaySE(20);
+
             durability = 0;
             OnTotalDamage();
         }
         else{
+            SEManager.Instance.PlaySE(19);
+
             if(type == CatAttackType.pee){
                 AddCleaningTool();
             }
@@ -156,7 +160,7 @@ abstract public class InteractiveEntity : MonoBehaviour
                     total_durability += uniform_damage * 0.9f;
                     PlayerCTRL.instance.washKit_num--;
                     PlayerCTRL.instance.cur_tool = ToolType.empty;
-                    SEManager.Instance.PlaySE(6);
+                    SEManager.Instance.PlaySE(21);
                     return true;
                 }
                 break;
