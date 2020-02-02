@@ -55,15 +55,16 @@ MonoBehaviour:
   attackTime: 1
   walkedCount: 0
   fooled_nums: 0
-  leastRandomWalk: 4
+  leastRandomWalk: 1
   attackProb: 0.8
-  perWalkProb: 0.2
+  perWalkProb: 0.7
   restProb: 0.2
-  moveSpeed: 1
+  moveSpeed: 4
   attackRange: 1
-  catPlayTimer: 5
+  catPlayTimer: 4
   directlyWalkProb: 0.5
   furniture: {fileID: 0}
+  happyValue: 25
   happyDecayTime: 10
   happyDecayRate: 1
   happyIncreaseRate: 1
