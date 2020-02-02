@@ -1535,7 +1535,7 @@ PrefabInstance:
     - target: {fileID: 3258243244170764977, guid: 13ade4d48c928ba4f877b4ba43bc226d,
         type: 3}
       propertyPath: price
-      value: 8
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3258243244170764979, guid: 13ade4d48c928ba4f877b4ba43bc226d,
         type: 3}
@@ -2328,7 +2328,7 @@ MonoBehaviour:
   spGood: {fileID: 0}
   spBroken: {fileID: 0}
   sr: {fileID: 0}
-  perGenMoney: 1
+  perGenMoney: 2
   ui_shop: {fileID: 1434407660}
 --- !u!114 &276763619
 MonoBehaviour:
@@ -4542,7 +4542,7 @@ PrefabInstance:
     - target: {fileID: 3258243244170764977, guid: 13ade4d48c928ba4f877b4ba43bc226d,
         type: 3}
       propertyPath: price
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3258243244170764979, guid: 13ade4d48c928ba4f877b4ba43bc226d,
         type: 3}
@@ -4914,6 +4914,11 @@ PrefabInstance:
         type: 3}
       propertyPath: targetTool
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258243244170764977, guid: 13ade4d48c928ba4f877b4ba43bc226d,
+        type: 3}
+      propertyPath: price
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3258243244170764979, guid: 13ade4d48c928ba4f877b4ba43bc226d,
         type: 3}
@@ -12656,7 +12661,7 @@ PrefabInstance:
     - target: {fileID: 3258243244170764977, guid: 13ade4d48c928ba4f877b4ba43bc226d,
         type: 3}
       propertyPath: price
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3258243244170764979, guid: 13ade4d48c928ba4f877b4ba43bc226d,
         type: 3}
@@ -13038,7 +13043,7 @@ PrefabInstance:
     - target: {fileID: 3258243244170764977, guid: 13ade4d48c928ba4f877b4ba43bc226d,
         type: 3}
       propertyPath: price
-      value: 9
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3258243244170764979, guid: 13ade4d48c928ba4f877b4ba43bc226d,
         type: 3}
@@ -16956,7 +16961,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1789782718301720296}
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -17264,7 +17269,7 @@ PrefabInstance:
     - target: {fileID: 3258243244170764977, guid: 13ade4d48c928ba4f877b4ba43bc226d,
         type: 3}
       propertyPath: price
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3258243244170764979, guid: 13ade4d48c928ba4f877b4ba43bc226d,
         type: 3}
