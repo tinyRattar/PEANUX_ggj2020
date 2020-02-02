@@ -302,7 +302,7 @@ MonoBehaviour:
   - {fileID: 8727170295913783520}
   spGood: {fileID: 21300000, guid: 89a2d42701d58cb4bae98e89233ae0e3, type: 3}
   spBroken: {fileID: 21300000, guid: 5a99c0a2458ad9e4b8c1facf3d1e4a60, type: 3}
-  sr: {fileID: 0}
+  sr: {fileID: 8727170295219089026}
 --- !u!114 &6874688805391369701
 MonoBehaviour:
   m_ObjectHideFlags: 0
