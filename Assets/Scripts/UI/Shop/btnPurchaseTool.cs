@@ -18,9 +18,9 @@ public class btnPurchaseTool : btnPurchase
         
     }
 
-    public override void DealPurchase()
+    public override void DealPurchaseSucess()
     {
-        base.DealPurchase();
+        base.DealPurchaseSucess();
         PlayerCTRL.instance.AddToolNum((int)targetTool, addNum);
         // Debug.LogError("todo: no implement");
     }

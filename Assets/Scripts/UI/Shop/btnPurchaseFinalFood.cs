@@ -16,7 +16,7 @@ public class btnPurchaseFinalFood : btnPurchase
         
     }
 
-    public override void DealPurchase()
+    public override void DealPurchaseSucess()
     {
         Debug.Log("You Win!!!!!!!!");
     }
