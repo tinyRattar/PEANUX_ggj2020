@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 abstract public class InteractiveEntity : MonoBehaviour
 {
@@ -93,6 +94,10 @@ abstract public class InteractiveEntity : MonoBehaviour
             }
         }
         DrawUI();
+        if (total_durability < 0)
+        {
+            SceneManager.LoadScene(2);
+        }
     }
 
     // 纯虚函数，家具的最大耐久度，每个家具不一样
