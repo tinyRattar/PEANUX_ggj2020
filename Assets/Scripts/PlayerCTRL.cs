@@ -44,6 +44,7 @@ public class PlayerCTRL : MonoBehaviour
     Animator animator;
     playerState state = playerState.idle;
     List<InteractiveEntity> attachedEntities = new List<InteractiveEntity>();
+    bool inComputer = false;
 
     [SerializeField] GameObject cattoy;
 
@@ -259,7 +260,9 @@ public class PlayerCTRL : MonoBehaviour
     {
         if(collision.tag == "interact")
         {
-            attachedEntities.Add(collision.GetComponent<InteractiveEntity>());
+            if (collision.name == "computer")
+                inComputer = true;
+            animator.SetBool("inComputer", true);
         }
     }
 
@@ -267,9 +270,9 @@ public class PlayerCTRL : MonoBehaviour
     {
         if (collision.tag == "interact")
         {
-            InteractiveEntity cie = collision.GetComponent<InteractiveEntity>();
-            attachedEntities.Remove(cie);
-            cie.OnPlayerExit();
+            if (collision.name == "computer")
+                inComputer = false;
+            animator.SetBool("inComputer", false);
         }
     }
 }
