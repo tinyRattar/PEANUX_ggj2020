@@ -45,8 +45,11 @@ public class PlayerCTRL : MonoBehaviour
     playerState state = playerState.idle;
     List<InteractiveEntity> attachedEntities = new List<InteractiveEntity>();
     bool inComputer = false;
+    float timerRepair = 0f;
+    [SerializeField] float repairTime = 1.0f;
 
     [SerializeField] GameObject cattoy;
+    [SerializeField] GameObject smoke;
 
     public void AddMoney(int value)
     {
@@ -118,7 +121,14 @@ public class PlayerCTRL : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if( cur_tool == ToolType.empty){
+        if (state == playerState.repair)
+        {
+            timerRepair -= Time.deltaTime;
+            if (timerRepair < 0) state = playerState.idle;
+            UpdateAnim(0, 0);
+            return;
+        }
+        if ( cur_tool == ToolType.empty){
             state = playerState.idle;
         }
         if( state == playerState.servingCat){
@@ -141,8 +151,15 @@ public class PlayerCTRL : MonoBehaviour
                 foreach (var item in colliders)
                 {
                     if (item.tag != "interact") continue;
-                    item.GetComponent<InteractiveEntity>().OnInteract(KeyCode.E);
-                    break;
+                    bool result = item.GetComponent<InteractiveEntity>().OnInteract(KeyCode.E);
+                    if (result)
+                    {
+                        smoke.transform.position = item.transform.position;
+                        GameObject.Instantiate(smoke);
+                        state = playerState.repair;
+                        timerRepair = repairTime;
+                        break;
+                    }
                 }
             }
         }else if (Input.GetKeyDown(KeyCode.F))
