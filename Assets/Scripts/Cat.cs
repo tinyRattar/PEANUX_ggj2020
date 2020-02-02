@@ -47,6 +47,8 @@ public class Cat : MonoBehaviour
     [SerializeField] float catPlayTimer = catPlayTimerValue;
     [SerializeField] float directlyWalkProb = 0.5f;
 
+    bool needCatMeow = true;
+
     [SerializeField] Transform furniture;
 
     float happyValue = 25f;
@@ -172,29 +174,39 @@ public class Cat : MonoBehaviour
         {
             case CatState.idle:
                 animator.SetInteger("catState", 0);
-                // pass
+                needCatMeow = true;
                 break;
             case CatState.walk:
                 animator.SetInteger("catState", 1);
+                needCatMeow = true;
                 CatWalk();
                 break;
             case CatState.directlywalk:
                 animator.SetInteger("catState", 1);
                 CatWalk();
+                needCatMeow = true;
                 break;
             case CatState.attack:
                 animator.SetInteger("catState", 2);
+                needCatMeow = true;
                 // attack timer
                 // if attackover then NextActionDecide()
                 break;
             case CatState.beLoved:
                 animator.SetInteger("catState", 4);
                 OnBeLoved();
-                Debug.Log("In Love");
+                // Debug.Log("In Love");
+                if(needCatMeow){
+                  Debug.Log("meow");
+                  SEManager.Instance.PlaySE(10);
+                  needCatMeow=false;
+                }
+
                 return;
                 break;
             case CatState.fooled:
                 UpdateFoolNums();
+                needCatMeow=true;
                 break;
             default:
                 break;
@@ -203,7 +215,7 @@ public class Cat : MonoBehaviour
         if (timer < 0)
             NextActionDecide();
 
-        // Èç¹ûÈËÔÚ¶ºÃ¨
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½Ã¨
         if (PlayerCTRL.instance.GetState() == playerState.summonCat)
         {
             // var ignore_probability = 0.0f + fooled_nums*0.2;
@@ -214,7 +226,7 @@ public class Cat : MonoBehaviour
             // if(roll_dice<ignore_probability){
             //     is_dice_rolled = true;
             //     PlayerCTRL.instance.SetState(playerState.idle);
-            //     // ±»ÎÞÊÓÁË
+            //     // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             //     return;
             // }
 
@@ -304,9 +316,8 @@ public class Cat : MonoBehaviour
 
         if (tool == ToolType.catToy)
         {
-            // Ã¨½Ð
-
-            // ·Å¶¯»­
+            // meow
+            // playing animation
             state = CatState.beLoved;
         }
         else

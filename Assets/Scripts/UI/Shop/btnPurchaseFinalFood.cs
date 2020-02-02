@@ -17,7 +17,7 @@ public class btnPurchaseFinalFood : btnPurchase
         
     }
 
-    public override void DealPurchase()
+    public override void DealPurchaseSucess()
     {
         SceneManager.LoadScene(3);
     }

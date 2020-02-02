@@ -8,3 +8,4 @@ obj/
 Temp/
 Assets/Audios/
 Output/
+.DS_Store

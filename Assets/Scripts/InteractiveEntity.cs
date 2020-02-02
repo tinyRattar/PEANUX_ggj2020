@@ -122,6 +122,7 @@ abstract public class InteractiveEntity : MonoBehaviour
                     total_durability += uniform_damage * 0.9f;
                     PlayerCTRL.instance.sewingKit_num--;
                     PlayerCTRL.instance.cur_tool = ToolType.empty;
+                    SEManager.Instance.PlaySE(18);
                     return true;
                 }
                 break;
@@ -132,6 +133,7 @@ abstract public class InteractiveEntity : MonoBehaviour
                     total_durability += uniform_damage * 0.9f;
                     PlayerCTRL.instance.hammer_num--;
                     PlayerCTRL.instance.cur_tool = ToolType.empty;
+                    SEManager.Instance.PlaySE(9);
                     return true;
                 }
                 break;
@@ -142,6 +144,7 @@ abstract public class InteractiveEntity : MonoBehaviour
                     total_durability += uniform_damage * 0.9f;
                     PlayerCTRL.instance.screwer_num--;
                     PlayerCTRL.instance.cur_tool = ToolType.empty;
+                    SEManager.Instance.PlaySE(9);
                     return true;
                 }
                 break;
@@ -152,6 +155,7 @@ abstract public class InteractiveEntity : MonoBehaviour
                     total_durability += uniform_damage * 0.9f;
                     PlayerCTRL.instance.spanner_num--;
                     PlayerCTRL.instance.cur_tool = ToolType.empty;
+                    SEManager.Instance.PlaySE(9);
                     return true;
                 }
                 break;
@@ -163,6 +167,7 @@ abstract public class InteractiveEntity : MonoBehaviour
                     total_durability += uniform_damage * 0.9f;
                     PlayerCTRL.instance.washKit_num--;
                     PlayerCTRL.instance.cur_tool = ToolType.empty;
+                    SEManager.Instance.PlaySE(6);
                     return true;
                 }
                 break;

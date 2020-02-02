@@ -23,9 +23,13 @@ public class btnPurchase : MonoBehaviour
         this.GetComponentInChildren<Text>().text = "$ " + price.ToString();
     }
 
-    public virtual void DealPurchase()
+    public virtual void DealPurchaseSucess()
     {
         SEManager.Instance.PlaySE(1);
+    }
+    public virtual void DealPurchaseFail()
+    {
+        SEManager.Instance.PlaySE(14);
     }
 
     public void OnClick()
@@ -33,11 +37,12 @@ public class btnPurchase : MonoBehaviour
         if(PlayerCTRL.instance.GetMoney() >= price)
         {
             PlayerCTRL.instance.AddMoney(-price);
-            DealPurchase();
+            DealPurchaseSucess();
             Debug.Log("purchase success");
         }
         else
         {
+            DealPurchaseFail();
             Debug.Log("we need more gold");
         }
     }

@@ -261,8 +261,10 @@ public class PlayerCTRL : MonoBehaviour
         if(collision.tag == "interact")
         {
             if (collision.name == "computer")
+            {
                 inComputer = true;
-            animator.SetBool("inComputer", true);
+                animator.SetBool("inComputer", true);
+            }
         }
     }
 
@@ -271,8 +273,10 @@ public class PlayerCTRL : MonoBehaviour
         if (collision.tag == "interact")
         {
             if (collision.name == "computer")
+            {
                 inComputer = false;
-            animator.SetBool("inComputer", false);
+                animator.SetBool("inComputer", false);
+            }
         }
     }
 }

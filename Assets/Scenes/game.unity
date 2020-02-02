@@ -16006,7 +16006,7 @@ PrefabInstance:
     - target: {fileID: 7735347176702285327, guid: 7c2c48c898d5b2547820fa2621e6f5db,
         type: 3}
       propertyPath: clips.Array.size
-      value: 19
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 7735347176702285327, guid: 7c2c48c898d5b2547820fa2621e6f5db,
         type: 3}
@@ -16109,6 +16109,41 @@ PrefabInstance:
       propertyPath: clips.Array.data[18]
       value: 
       objectReference: {fileID: 8300000, guid: fe1cc90dbddb74d4b986ed36870a757f, type: 3}
+    - target: {fileID: 7735347176702285327, guid: 7c2c48c898d5b2547820fa2621e6f5db,
+        type: 3}
+      propertyPath: clips.Array.data[19]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ff829777424b034fb162214f8460446, type: 3}
+    - target: {fileID: 7735347176702285327, guid: 7c2c48c898d5b2547820fa2621e6f5db,
+        type: 3}
+      propertyPath: clips.Array.data[20]
+      value: 
+      objectReference: {fileID: 8300000, guid: b2b35872097c36f4a9cf682ce328a4ed, type: 3}
+    - target: {fileID: 7735347176702285327, guid: 7c2c48c898d5b2547820fa2621e6f5db,
+        type: 3}
+      propertyPath: clips.Array.data[21]
+      value: 
+      objectReference: {fileID: 8300000, guid: 260c84fe1d5c1114584822aa456053e2, type: 3}
+    - target: {fileID: 7735347176702285327, guid: 7c2c48c898d5b2547820fa2621e6f5db,
+        type: 3}
+      propertyPath: clips.Array.data[22]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3f17b4b21817e384d9499c860aa6871c, type: 3}
+    - target: {fileID: 7735347176702285327, guid: 7c2c48c898d5b2547820fa2621e6f5db,
+        type: 3}
+      propertyPath: clips.Array.data[23]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6410f42602f30454eb34687c7b6a5b74, type: 3}
+    - target: {fileID: 7735347176702285327, guid: 7c2c48c898d5b2547820fa2621e6f5db,
+        type: 3}
+      propertyPath: clips.Array.data[24]
+      value: 
+      objectReference: {fileID: 8300000, guid: afd4d9cea60ac0842ac1aa58692375dc, type: 3}
+    - target: {fileID: 7735347176702285327, guid: 7c2c48c898d5b2547820fa2621e6f5db,
+        type: 3}
+      propertyPath: clips.Array.data[25]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4c7fb914dfe58a1499a84da3ad403428, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c2c48c898d5b2547820fa2621e6f5db, type: 3}
 --- !u!1001 &8912608475845106884
