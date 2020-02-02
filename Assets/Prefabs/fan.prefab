@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   durability: 30
   durability_max: 20
+  brokenThresh: 0.6
   sewingKit_required: 0
   hammer_required: 0
   screwer_required: 0
@@ -62,6 +63,9 @@ MonoBehaviour:
   - {fileID: 6720231630711832523}
   - {fileID: 5377079514445482069}
   - {fileID: 2497799212798441198}
+  spGood: {fileID: 21300000, guid: 8dd301f746f860f4db73b4919c5619d1, type: 3}
+  spBroken: {fileID: 21300000, guid: 10bdb48337893344ea48cf27607a3270, type: 3}
+  sr: {fileID: 7685264047942131748}
 --- !u!61 &455184702570726322
 BoxCollider2D:
   m_ObjectHideFlags: 0
